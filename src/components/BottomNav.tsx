@@ -1,0 +1,65 @@
+import { Home, Sprout, Camera, BookOpen, User } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const tabs = [
+  { path: "/", label: "Home", labelKi: "Ahabanza", icon: Home },
+  { path: "/farm", label: "My Farm", labelKi: "Umurima", icon: Sprout },
+  { path: "/scan", label: "Scan", labelKi: "Suzuma", icon: Camera },
+  { path: "/knowledge", label: "Learn", labelKi: "Iga", icon: BookOpen },
+  { path: "/profile", label: "Profile", labelKi: "Umwirondoro", icon: User },
+];
+
+export function BottomNav() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  return (
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card border-t border-border pb-safe z-50">
+      <div className="flex items-center justify-around h-16">
+        {tabs.map((tab) => {
+          const isActive = location.pathname === tab.path;
+          const Icon = tab.icon;
+          const isScan = tab.path === "/scan";
+
+          if (isScan) {
+            return (
+              <button
+                key={tab.path}
+                onClick={() => navigate(tab.path)}
+                className="flex flex-col items-center -mt-5"
+              >
+                <div className="w-14 h-14 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                  <Icon className="w-7 h-7 text-accent-foreground" />
+                </div>
+                <span className="text-[10px] font-display font-semibold mt-0.5 text-accent">
+                  {tab.label}
+                </span>
+              </button>
+            );
+          }
+
+          return (
+            <button
+              key={tab.path}
+              onClick={() => navigate(tab.path)}
+              className="flex flex-col items-center gap-0.5 min-w-[56px]"
+            >
+              <Icon
+                className={`w-5 h-5 transition-colors ${
+                  isActive ? "text-primary" : "text-muted-foreground"
+                }`}
+              />
+              <span
+                className={`text-[10px] font-display font-semibold transition-colors ${
+                  isActive ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                {tab.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
