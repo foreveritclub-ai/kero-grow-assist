@@ -1,17 +1,19 @@
 import { Home, Sprout, Camera, BookOpen, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const tabs = [
-  { path: "/", label: "Home", labelKi: "Ahabanza", icon: Home },
-  { path: "/farm", label: "My Farm", labelKi: "Umurima", icon: Sprout },
-  { path: "/scan", label: "Scan", labelKi: "Suzuma", icon: Camera },
-  { path: "/knowledge", label: "Learn", labelKi: "Iga", icon: BookOpen },
-  { path: "/profile", label: "Profile", labelKi: "Umwirondoro", icon: User },
+  { path: "/", labelKey: "nav.home", icon: Home },
+  { path: "/farm", labelKey: "nav.farm", icon: Sprout },
+  { path: "/scan", labelKey: "nav.scan", icon: Camera },
+  { path: "/knowledge", labelKey: "nav.learn", icon: BookOpen },
+  { path: "/profile", labelKey: "nav.profile", icon: User },
 ];
 
 export function BottomNav() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card border-t border-border pb-safe z-50">
@@ -32,7 +34,7 @@ export function BottomNav() {
                   <Icon className="w-7 h-7 text-accent-foreground" />
                 </div>
                 <span className="text-[10px] font-display font-semibold mt-0.5 text-accent">
-                  {tab.label}
+                  {t(tab.labelKey)}
                 </span>
               </button>
             );
@@ -44,17 +46,9 @@ export function BottomNav() {
               onClick={() => navigate(tab.path)}
               className="flex flex-col items-center gap-0.5 min-w-[56px]"
             >
-              <Icon
-                className={`w-5 h-5 transition-colors ${
-                  isActive ? "text-primary" : "text-muted-foreground"
-                }`}
-              />
-              <span
-                className={`text-[10px] font-display font-semibold transition-colors ${
-                  isActive ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                {tab.label}
+              <Icon className={`w-5 h-5 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"}`} />
+              <span className={`text-[10px] font-display font-semibold transition-colors ${isActive ? "text-primary" : "text-muted-foreground"}`}>
+                {t(tab.labelKey)}
               </span>
             </button>
           );
