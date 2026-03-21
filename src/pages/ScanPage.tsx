@@ -7,11 +7,13 @@ import { DiagnosisCard, DiagnosisResult } from "@/components/DiagnosisCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ScanPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t, lang, setLang } = useLanguage();
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const initialMode = searchParams.get("mode") === "text" ? "text" : "image";
   const [mode, setMode] = useState<"image" | "text">(initialMode);
@@ -31,6 +33,33 @@ export default function ScanPage() {
     }
   };
 
+  const saveDiagnosis = async (diagnosis: DiagnosisResult) => {
+    if (!user) return;
+    try {
+      await supabase.from("diagnosis_history").insert({
+        user_id: user.id,
+        mode,
+        crop_name: cropName || null,
+        symptoms: symptoms || null,
+        severity: diagnosis.severity,
+        diagnosis_en: diagnosis.diagnosis_en,
+        diagnosis_ki: diagnosis.diagnosis_ki,
+        disease_or_issue_en: diagnosis.disease_or_issue_en,
+        disease_or_issue_ki: diagnosis.disease_or_issue_ki,
+        solutions_en: diagnosis.solutions_en,
+        solutions_ki: diagnosis.solutions_ki,
+        prevention_en: diagnosis.prevention_en,
+        prevention_ki: diagnosis.prevention_ki,
+        emergency_solution_en: diagnosis.emergency_solution_en || null,
+        emergency_solution_ki: diagnosis.emergency_solution_ki || null,
+        proper_solution_en: diagnosis.proper_solution_en || null,
+        proper_solution_ki: diagnosis.proper_solution_ki || null,
+      });
+    } catch (err) {
+      console.error("Failed to save diagnosis:", err);
+    }
+  };
+
   const handleDiagnose = async () => {
     setLoading(true);
     setResult(null);
@@ -46,7 +75,9 @@ export default function ScanPage() {
       const { data, error } = await supabase.functions.invoke("crop-diagnosis", { body: payload });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
-      setResult(data as DiagnosisResult);
+      const diagnosis = data as DiagnosisResult;
+      setResult(diagnosis);
+      await saveDiagnosis(diagnosis);
     } catch (err: any) {
       console.error("Diagnosis error:", err);
       toast({

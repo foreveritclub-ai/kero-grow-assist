@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      diagnosis_history: {
+        Row: {
+          created_at: string
+          crop_name: string | null
+          diagnosis_en: string | null
+          diagnosis_ki: string | null
+          disease_or_issue_en: string | null
+          disease_or_issue_ki: string | null
+          emergency_solution_en: string | null
+          emergency_solution_ki: string | null
+          id: string
+          image_url: string | null
+          mode: string
+          prevention_en: Json | null
+          prevention_ki: Json | null
+          proper_solution_en: string | null
+          proper_solution_ki: string | null
+          severity: string | null
+          solutions_en: Json | null
+          solutions_ki: Json | null
+          symptoms: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          crop_name?: string | null
+          diagnosis_en?: string | null
+          diagnosis_ki?: string | null
+          disease_or_issue_en?: string | null
+          disease_or_issue_ki?: string | null
+          emergency_solution_en?: string | null
+          emergency_solution_ki?: string | null
+          id?: string
+          image_url?: string | null
+          mode?: string
+          prevention_en?: Json | null
+          prevention_ki?: Json | null
+          proper_solution_en?: string | null
+          proper_solution_ki?: string | null
+          severity?: string | null
+          solutions_en?: Json | null
+          solutions_ki?: Json | null
+          symptoms?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string | null
+          diagnosis_en?: string | null
+          diagnosis_ki?: string | null
+          disease_or_issue_en?: string | null
+          disease_or_issue_ki?: string | null
+          emergency_solution_en?: string | null
+          emergency_solution_ki?: string | null
+          id?: string
+          image_url?: string | null
+          mode?: string
+          prevention_en?: Json | null
+          prevention_ki?: Json | null
+          proper_solution_en?: string | null
+          proper_solution_ki?: string | null
+          severity?: string | null
+          solutions_en?: Json | null
+          solutions_ki?: Json | null
+          symptoms?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          location: string | null
+          phone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

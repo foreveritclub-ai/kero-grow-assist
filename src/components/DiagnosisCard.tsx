@@ -2,6 +2,8 @@ import { Shield, AlertTriangle, CheckCircle } from "lucide-react";
 
 export interface DiagnosisResult {
   severity: "good" | "warning" | "danger";
+  greeting_ki?: string;
+  greeting_en?: string;
   diagnosis_en: string;
   diagnosis_ki: string;
   disease_or_issue_en: string;
@@ -10,6 +12,12 @@ export interface DiagnosisResult {
   solutions_ki: string[];
   prevention_en: string[];
   prevention_ki: string[];
+  emergency_solution_en?: string;
+  emergency_solution_ki?: string;
+  proper_solution_en?: string;
+  proper_solution_ki?: string;
+  encouragement_en?: string;
+  encouragement_ki?: string;
 }
 
 interface DiagnosisCardProps {
@@ -48,14 +56,23 @@ export function DiagnosisCard({ result, lang }: DiagnosisCardProps) {
   const sev = severityConfig[result.severity] || severityConfig.warning;
   const Icon = sev.icon;
 
+  const greeting = lang === "ki" ? result.greeting_ki : result.greeting_en;
   const diagnosis = lang === "ki" ? result.diagnosis_ki : result.diagnosis_en;
   const issue = lang === "ki" ? result.disease_or_issue_ki : result.disease_or_issue_en;
   const solutions = lang === "ki" ? result.solutions_ki : result.solutions_en;
   const prevention = lang === "ki" ? result.prevention_ki : result.prevention_en;
+  const emergency = lang === "ki" ? result.emergency_solution_ki : result.emergency_solution_en;
+  const proper = lang === "ki" ? result.proper_solution_ki : result.proper_solution_en;
+  const encouragement = lang === "ki" ? result.encouragement_ki : result.encouragement_en;
   const sevLabel = lang === "ki" ? sev.labelKi : sev.label;
 
   return (
     <div className="space-y-4">
+      {/* Greeting */}
+      {greeting && (
+        <p className="text-base font-display font-bold text-foreground">{greeting}</p>
+      )}
+
       {/* Severity Banner */}
       <div className={`rounded-xl p-4 border ${sev.bgClass} ${sev.borderClass} flex items-center gap-3`}>
         <Icon className={`w-8 h-8 ${sev.textClass}`} />
@@ -67,16 +84,30 @@ export function DiagnosisCard({ result, lang }: DiagnosisCardProps) {
 
       {/* Diagnosis */}
       <div className="bg-card rounded-xl border border-border p-4">
-        <h3 className="font-display font-bold text-sm mb-2">
-          {lang === "ki" ? "Isuzuma" : "Diagnosis"}
-        </h3>
+        <h3 className="font-display font-bold text-sm mb-2">🧠 {lang === "ki" ? "Isuzuma" : "Diagnosis"}</h3>
         <p className="text-sm text-muted-foreground font-body leading-relaxed">{diagnosis}</p>
       </div>
+
+      {/* Emergency Solution */}
+      {emergency && (
+        <div className="bg-severity-warning/5 rounded-xl border border-severity-warning/20 p-4">
+          <h3 className="font-display font-bold text-sm mb-2">⚡ {lang === "ki" ? "Igisubizo cyihuse" : "Emergency Solution"}</h3>
+          <p className="text-sm text-foreground font-body leading-relaxed">{emergency}</p>
+        </div>
+      )}
+
+      {/* Proper Solution */}
+      {proper && (
+        <div className="bg-primary/5 rounded-xl border border-primary/20 p-4">
+          <h3 className="font-display font-bold text-sm mb-2">🛠 {lang === "ki" ? "Igisubizo cyiza" : "Proper Solution"}</h3>
+          <p className="text-sm text-foreground font-body leading-relaxed">{proper}</p>
+        </div>
+      )}
 
       {/* Solutions */}
       <div className="bg-card rounded-xl border border-border p-4">
         <h3 className="font-display font-bold text-sm mb-3">
-          {lang === "ki" ? "Ibisubizo" : "Recommended Solutions"}
+          {lang === "ki" ? "Ibisubizo byose" : "All Solutions"}
         </h3>
         <div className="space-y-2">
           {solutions?.map((sol, i) => (
@@ -104,6 +135,13 @@ export function DiagnosisCard({ result, lang }: DiagnosisCardProps) {
           ))}
         </div>
       </div>
+
+      {/* Encouragement */}
+      {encouragement && (
+        <div className="bg-secondary/10 rounded-xl p-4 text-center">
+          <p className="text-sm font-display font-semibold text-foreground">{encouragement}</p>
+        </div>
+      )}
     </div>
   );
 }

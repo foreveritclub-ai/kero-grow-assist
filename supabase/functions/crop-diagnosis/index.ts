@@ -6,6 +6,52 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const RWANDA_CROPS = `Common crops in Rwanda (Season A & B 2024 survey): Maize (Ibigori), Beans (Ibishyimbo), Rice (Umuceri), Irish Potatoes (Ibirayi), Sweet Potatoes (Ibijumba), Cassava (Imyumbati), Banana/Plantain (Ibitoki), Sorghum (Amasaka), Wheat (Ingano), Soybean (Soya), Groundnuts (Ubunyobwa), Peas (Amashaza), Vegetables (Imboga) including Tomatoes (Inyanya), Onions (Ibinyabuntu), Cabbage (Amashu), Carrots (Karoti), Eggplant (Intoryi), Peppers (Urusenda), Amaranth (Imbwija), Fruits including Avocado (Avoka), Mango (Imyembe), Passion fruit (Marakuja), Pineapple (Inanasi), Tree tomato (Ikinyomoro), Coffee (Ikawa), Tea (Icyayi), Pyrethrum, Sugarcane (Igisheke), Sunflower, Mushrooms (Ibihumyo), Garlic (Tungurusumu).`;
+
+const SYSTEM_PROMPT = `You are Kero, an agricultural assistant for farmers in Rwanda.
+
+${RWANDA_CROPS}
+
+For every problem:
+- Identify crop and issue
+- Give TWO types of solutions:
+
+1. ⚡ Emergency solution:
+- Simple, immediate, low-cost
+- Use locally available resources (ash, water, soap, removing leaves)
+
+2. 🛠 Proper solution:
+- Best long-term fix
+- Include fertilizers, pesticides, or recommended products available in Rwanda
+
+Rules:
+- Speak in Kinyarwanda first, then English
+- Use simple, clear language
+- Be friendly and supportive
+- Do not use complex scientific terms
+- Always reassure the farmer
+
+Respond in this EXACT JSON format (no markdown, no code blocks, just raw JSON):
+{
+  "severity": "good" | "warning" | "danger",
+  "greeting_ki": "👋 short greeting in Kinyarwanda",
+  "greeting_en": "👋 short greeting in English",
+  "diagnosis_en": "Brief diagnosis in English",
+  "diagnosis_ki": "Brief diagnosis in Kinyarwanda",
+  "disease_or_issue_en": "Name of disease/pest/deficiency in English",
+  "disease_or_issue_ki": "Name in Kinyarwanda",
+  "emergency_solution_en": "⚡ Simple immediate solution in English using local resources",
+  "emergency_solution_ki": "⚡ Igisubizo cyihuse mu Kinyarwanda",
+  "proper_solution_en": "🛠 Long-term proper solution in English with product names",
+  "proper_solution_ki": "🛠 Igisubizo cyiza cy'igihe kirekire mu Kinyarwanda",
+  "solutions_en": ["Solution 1", "Solution 2", "Solution 3"],
+  "solutions_ki": ["Umuti 1", "Umuti 2", "Umuti 3"],
+  "prevention_en": ["Prevention tip 1", "Prevention tip 2"],
+  "prevention_ki": ["Inama 1", "Inama 2"],
+  "encouragement_ki": "💚 Encouraging message in Kinyarwanda",
+  "encouragement_en": "💚 Encouraging message in English"
+}`;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -23,20 +69,7 @@ serve(async (req) => {
       userContent = [
         {
           type: "text",
-          text: `You are an expert agricultural AI assistant for farmers in Rwanda. Analyze this crop image and provide a diagnosis.
-
-Respond in this EXACT JSON format (no markdown, no code blocks, just raw JSON):
-{
-  "severity": "good" | "warning" | "danger",
-  "diagnosis_en": "Brief diagnosis in English",
-  "diagnosis_ki": "Brief diagnosis in Kinyarwanda",
-  "disease_or_issue_en": "Name of disease/pest/deficiency in English",
-  "disease_or_issue_ki": "Name in Kinyarwanda",
-  "solutions_en": ["Solution 1", "Solution 2", "Solution 3"],
-  "solutions_ki": ["Umuti 1", "Umuti 2", "Umuti 3"],
-  "prevention_en": ["Prevention tip 1", "Prevention tip 2"],
-  "prevention_ki": ["Inama 1", "Inama 2"]
-}`,
+          text: `Analyze this crop image from a Rwandan farm. Identify the problem and provide solutions.\n\n${SYSTEM_PROMPT}`,
         },
         {
           type: "image_url",
@@ -44,23 +77,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks, just raw JSON):
         },
       ];
     } else {
-      userContent = `You are an expert agricultural AI assistant for farmers in Rwanda. A farmer describes their crop problem:
-
-Crop: ${cropName || "Unknown"}
-Symptoms: ${symptoms}
-
-Provide a diagnosis. Respond in this EXACT JSON format (no markdown, no code blocks, just raw JSON):
-{
-  "severity": "good" | "warning" | "danger",
-  "diagnosis_en": "Brief diagnosis in English",
-  "diagnosis_ki": "Brief diagnosis in Kinyarwanda",
-  "disease_or_issue_en": "Name of disease/pest/deficiency in English",
-  "disease_or_issue_ki": "Name in Kinyarwanda",
-  "solutions_en": ["Solution 1", "Solution 2", "Solution 3"],
-  "solutions_ki": ["Umuti 1", "Umuti 2", "Umuti 3"],
-  "prevention_en": ["Prevention tip 1", "Prevention tip 2"],
-  "prevention_ki": ["Inama 1", "Inama 2"]
-}`;
+      userContent = `A Rwandan farmer describes their crop problem:\n\nCrop: ${cropName || "Unknown"}\nSymptoms: ${symptoms}\n\n${SYSTEM_PROMPT}`;
     }
 
     const response = await fetch(
@@ -74,10 +91,7 @@ Provide a diagnosis. Respond in this EXACT JSON format (no markdown, no code blo
         body: JSON.stringify({
           model: "google/gemini-2.5-flash",
           messages: [
-            {
-              role: "user",
-              content: userContent,
-            },
+            { role: "user", content: userContent },
           ],
         }),
       }
@@ -103,13 +117,10 @@ Provide a diagnosis. Respond in this EXACT JSON format (no markdown, no code blo
 
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content;
-
     if (!content) throw new Error("No response from AI");
 
-    // Parse the JSON from the AI response
     let diagnosis;
     try {
-      // Remove potential markdown code blocks
       const cleaned = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
       diagnosis = JSON.parse(cleaned);
     } catch {
