@@ -83,6 +83,90 @@ export type Database = {
         }
         Relationships: []
       }
+      farm_crops: {
+        Row: {
+          created_at: string
+          crop_name: string
+          diagnosis_id: string | null
+          farm_id: string
+          growth_stage: string | null
+          id: string
+          notes: string | null
+          planting_date: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          crop_name: string
+          diagnosis_id?: string | null
+          farm_id: string
+          growth_stage?: string | null
+          id?: string
+          notes?: string | null
+          planting_date?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string
+          diagnosis_id?: string | null
+          farm_id?: string
+          growth_stage?: string | null
+          id?: string
+          notes?: string | null
+          planting_date?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "farm_crops_diagnosis_id_fkey"
+            columns: ["diagnosis_id"]
+            isOneToOne: false
+            referencedRelation: "diagnosis_history"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "farm_crops_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      farms: {
+        Row: {
+          created_at: string
+          id: string
+          location: string | null
+          name: string
+          size_hectares: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          location?: string | null
+          name: string
+          size_hectares?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          location?: string | null
+          name?: string
+          size_hectares?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

@@ -6,7 +6,31 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const RWANDA_CROPS = `Common crops in Rwanda (Season A & B 2024 survey): Maize (Ibigori), Beans (Ibishyimbo), Rice (Umuceri), Irish Potatoes (Ibirayi), Sweet Potatoes (Ibijumba), Cassava (Imyumbati), Banana/Plantain (Ibitoki), Sorghum (Amasaka), Wheat (Ingano), Soybean (Soya), Groundnuts (Ubunyobwa), Peas (Amashaza), Vegetables (Imboga) including Tomatoes (Inyanya), Onions (Ibinyabuntu), Cabbage (Amashu), Carrots (Karoti), Eggplant (Intoryi), Peppers (Urusenda), Amaranth (Imbwija), Fruits including Avocado (Avoka), Mango (Imyembe), Passion fruit (Marakuja), Pineapple (Inanasi), Tree tomato (Ikinyomoro), Coffee (Ikawa), Tea (Icyayi), Pyrethrum, Sugarcane (Igisheke), Sunflower, Mushrooms (Ibihumyo), Garlic (Tungurusumu).`;
+const RWANDA_CROPS = `Common crops & plants in Rwanda (Season A & B 2024 agricultural survey + additional):
+
+CEREALS: Maize (Ibigori), Rice (Umuceri), Sorghum (Amasaka), Wheat (Ingano), Finger Millet (Uburo), Barley
+
+LEGUMES: Beans (Ibishyimbo), Soybeans (Soya), Groundnuts (Ubunyobwa), Peas (Amashaza), Lentils, Chickpeas, Cowpeas
+
+TUBERS & ROOTS: Irish Potatoes (Ibirayi), Sweet Potatoes (Ibijumba), Cassava (Imyumbati), Yams (Ibikoro), Taro (Amateke)
+
+VEGETABLES: Tomatoes (Inyanya), Onions (Ibinyabuntu), Cabbage (Amashu), Carrots (Karoti), Eggplant (Intoryi), Peppers (Urusenda), Amaranth (Imbwija), Spinach (Epinari), Leeks, Lettuce, Cucumber, Zucchini/Courgette, Green beans (Imiteja), Beetroot, Radish, Celery, Pumpkin (Igihaza), Watermelon, Garlic (Tungurusumu), Ginger (Tangawizi), Chili peppers
+
+FRUITS: Banana/Plantain (Ibitoki), Avocado (Avoka), Mango (Imyembe), Passion fruit (Marakuja), Pineapple (Inanasi), Tree tomato/Tamarillo (Ikinyomoro), Papaya (Ipapayi), Guava (Amapera), Oranges (Amacunga), Lemons (Indimu), Strawberries, Apple, Plum, Grapes, Lychee, Jackfruit
+
+CASH CROPS: Coffee (Ikawa), Tea (Icyayi), Pyrethrum, Sugarcane (Igisheke), Tobacco, Macadamia, Stevia
+
+OIL CROPS: Sunflower (Imbuto z'izuba), Palm oil, Sesame, Castor
+
+TREES & FORESTRY: Eucalyptus, Grevillea, Pine, Bamboo, Moringa, Calliandra, Leucaena, Albizia, Jacaranda, Cypress, Cedrela, Acacia
+
+FLOWERS & ORNAMENTALS: Roses, Lilies, Chrysanthemums, Carnations, Gladiolus, Gerbera, Orchids, Marigold, Bougainvillea, Hibiscus, Bird of Paradise, Sunflower (ornamental)
+
+SPICES & HERBS: Basil, Mint, Rosemary, Thyme, Lemongrass, Coriander, Parsley, Dill, Fennel, Vanilla, Cinnamon, Cardamom, Turmeric, Black pepper
+
+FODDER & PASTURE: Napier grass, Brachiaria, Desmodium, Clover, Alfalfa, Rhodes grass, Kikuyu grass
+
+MUSHROOMS: Oyster mushrooms (Ibihumyo), Shiitake, Button mushrooms`;
 
 const SYSTEM_PROMPT = `You are Kero, an agricultural assistant for farmers in Rwanda.
 

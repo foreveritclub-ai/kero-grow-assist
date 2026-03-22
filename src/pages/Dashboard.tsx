@@ -1,4 +1,4 @@
-import { Camera, Keyboard, Sprout, Bell, TrendingUp, BookOpen, Clock } from "lucide-react";
+import { Camera, Keyboard, Sprout, TrendingUp, BookOpen, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MobileLayout } from "@/components/MobileLayout";
@@ -20,6 +20,7 @@ export default function Dashboard() {
   const { t, lang, setLang } = useLanguage();
   const { user } = useAuth();
   const [recent, setRecent] = useState<RecentItem[]>([]);
+  const [farmCount, setFarmCount] = useState(0);
 
   useEffect(() => {
     if (!user) return;
@@ -29,6 +30,10 @@ export default function Dashboard() {
       .order("created_at", { ascending: false })
       .limit(3)
       .then(({ data }) => setRecent((data as RecentItem[]) || []));
+    supabase
+      .from("farms")
+      .select("id", { count: "exact", head: true })
+      .then(({ count }) => setFarmCount(count || 0));
   }, [user]);
 
   const actionCards = [
@@ -68,7 +73,7 @@ export default function Dashboard() {
           <Sprout className="w-8 h-8 text-secondary" />
           <div>
             <p className="text-primary-foreground/70 text-xs font-body">{t("dash.yourFarms")}</p>
-            <p className="text-primary-foreground font-display font-bold text-lg">0 {t("dash.cropsTracked")}</p>
+            <p className="text-primary-foreground font-display font-bold text-lg">{farmCount} {t("dash.cropsTracked")}</p>
           </div>
         </div>
       </div>

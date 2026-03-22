@@ -16,10 +16,11 @@ export default function ScanPage() {
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const initialMode = searchParams.get("mode") === "text" ? "text" : "image";
+  const initialCrop = searchParams.get("crop") || "";
   const [mode, setMode] = useState<"image" | "text">(initialMode);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [symptoms, setSymptoms] = useState("");
-  const [cropName, setCropName] = useState("");
+  const [cropName, setCropName] = useState(initialCrop);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
