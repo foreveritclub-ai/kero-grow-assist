@@ -85,6 +85,12 @@ const translations: Record<string, Record<Lang, string>> = {
   "kb.diseaseDesc": { en: "Common crop diseases and treatments", ki: "Indwara z'ibihingwa zisanzwe n'imiti" },
   "kb.comingSoon": { en: "Coming soon", ki: "Biragera vuba" },
   "kb.comingSoonDesc": { en: "Video tutorials, offline guides, and community Q&A — all in Kinyarwanda and English.", ki: "Amasomo kuri videwo, amabwiriza adakenera interineti, n'ibibazo n'ibisubizo — byose mu Kinyarwanda no mu Cyongereza." },
+  "kb.cashCrops": { en: "Cash Crops", ki: "Ibihingwa by'ubucuruzi" },
+  "kb.cashCropsDesc": { en: "Coffee, tea and commercial crop guides", ki: "Amabwiriza y'ikawa, icyayi n'ibihingwa by'ubucuruzi" },
+  "kb.flowers": { en: "Flowers & Ornamentals", ki: "Indabo n'ibishoramuriro" },
+  "kb.flowersDesc": { en: "Growing flowers for local and export markets", ki: "Guhinga indabo ku isoko ry'imbere n'iry'amahanga" },
+  "kb.trees": { en: "Trees & Agroforestry", ki: "Ibiti n'ubuhinzi bw'ibiti" },
+  "kb.treesDesc": { en: "Tree planting and agroforestry practices", ki: "Gutera ibiti n'imikorere y'ubuhinzi bw'ibiti" },
 
   // Profile
   "profile.title": { en: "Profile", ki: "Umwirondoro" },
