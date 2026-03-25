@@ -7,4 +7,10 @@ import "@fontsource/open-sans/600.css";
 import App from "./App.tsx";
 import "./index.css";
 
+// Capture PWA install prompt for use in Profile page
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  (window as any).deferredPWAPrompt = e;
+});
+
 createRoot(document.getElementById("root")!).render(<App />);
