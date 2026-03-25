@@ -92,6 +92,20 @@ const translations: Record<string, Record<Lang, string>> = {
   "kb.trees": { en: "Trees & Agroforestry", ki: "Ibiti n'ubuhinzi bw'ibiti" },
   "kb.treesDesc": { en: "Tree planting and agroforestry practices", ki: "Gutera ibiti n'imikorere y'ubuhinzi bw'ibiti" },
 
+  // Community Q&A
+  "community.title": { en: "Community Q&A", ki: "Ibibazo n'Ibisubizo" },
+  "community.subtitle": { en: "Ask questions, help other farmers", ki: "Baza ibibazo, ufashe abandi bahinzi" },
+  "community.ask": { en: "Ask", ki: "Baza" },
+  "community.postQuestion": { en: "Post Question", ki: "Ohereza ikibazo" },
+  "community.noQuestions": { en: "No questions yet", ki: "Nta bibazo bihari" },
+  "community.noQuestionsDesc": { en: "Be the first to ask a question!", ki: "Ba uwa mbere ubaza ikibazo!" },
+
+  // Weather
+  "weather.title": { en: "Weather", ki: "Ikirere" },
+  "weather.subtitle": { en: "Forecast & crop alerts for your area", ki: "Iteganyakirere n'impanuro z'ibihingwa" },
+  "weather.cropAlerts": { en: "Crop Alerts", ki: "Impanuro z'ibihingwa" },
+  "weather.forecast": { en: "7-Day Forecast", ki: "Iteganyakirere ry'iminsi 7" },
+
   // Profile
   "profile.title": { en: "Profile", ki: "Umwirondoro" },
   "profile.farmer": { en: "Farmer", ki: "Umuhinzi" },
