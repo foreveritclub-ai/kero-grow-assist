@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, ChevronRight, Globe, LogOut, Settings, Shield, User, Save, Loader2 } from "lucide-react";
+import { ArrowLeft, ChevronRight, Download, Globe, LogOut, Settings, Shield, User, Save, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -139,6 +139,29 @@ export default function ProfilePage() {
             </button>
           </div>
         )}
+
+        <button
+          onClick={() => {
+            const w = window as any;
+            if (w.deferredPWAPrompt) {
+              w.deferredPWAPrompt.prompt();
+              w.deferredPWAPrompt.userChoice.then(() => { w.deferredPWAPrompt = null; });
+            } else {
+              toast({
+                title: lang === "ki" ? "Kwinjiza Kero" : "Install Kero",
+                description: lang === "ki"
+                  ? "Kanda 'Share' hanyuma 'Add to Home Screen' kuri Safari, cyangwa menu kuri Chrome."
+                  : "Tap 'Share' then 'Add to Home Screen' on Safari, or use Chrome's menu.",
+              });
+            }
+          }}
+          className="w-full flex items-center gap-3 bg-primary/10 rounded-xl px-4 py-3.5 active:bg-primary/20 transition-colors"
+        >
+          <Download className="w-5 h-5 text-primary" />
+          <span className="font-display text-sm font-semibold text-primary">
+            {lang === "ki" ? "Injiza Kero ku telefoni" : "Install Kero App"}
+          </span>
+        </button>
 
         <button onClick={handleLogOut} className="w-full flex items-center gap-3 bg-destructive/10 rounded-xl px-4 py-3.5 active:bg-destructive/20 transition-colors">
           <LogOut className="w-5 h-5 text-destructive" />
