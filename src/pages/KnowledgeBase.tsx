@@ -167,6 +167,90 @@ const knowledgeData: KBTopic[] = [
       },
     ],
   },
+  {
+    icon: Sprout,
+    titleKey: "kb.vegetables",
+    descKey: "kb.vegetablesDesc",
+    articles: [
+      {
+        id: "vg1",
+        titleEn: "Growing Tomatoes in Rwanda",
+        titleKi: "Guhinga Inyanya mu Rwanda",
+        contentEn: "Tomatoes are one of the most profitable vegetables:\n\n**Varieties:** Roma, Moneymaker, Rio Grande, Cal J\n\n**Planting:**\n• Start seeds in nursery beds\n• Transplant after 4-5 weeks\n• Spacing: 60cm × 45cm\n• Stake plants for support\n\n**Care:**\n• Water regularly but avoid wetting leaves\n• Mulch heavily to retain moisture\n• Fertilize with NPK 17-17-17 at planting, DAP at flowering\n• Prune suckers for bigger fruits\n\n**Common problems:**\n• Late blight — use Ridomil Gold or Dithane M-45\n• Tomato leaf miner — use Duduthrin\n• Blossom end rot — add calcium (lime)\n\n**Prevention:**\n• Rotate crops every 2-3 seasons\n• Remove infected plants immediately\n• Use drip irrigation to avoid leaf wetness\n• Plant resistant varieties\n• Space properly for air circulation",
+        contentKi: "Inyanya ni kimwe mu mboga zikungahaza cyane:\n\n**Ubwoko:** Roma, Moneymaker, Rio Grande, Cal J\n\n**Gutera:**\n• Tangirira imbuto mu mashyamba y'ibiterwa\n• Imura nyuma y'ibyumweru 4-5\n• Umwanya: 60cm × 45cm\n• Shyira ibiti byo gushyigikira\n\n**Kwita:**\n• Hira buri gihe ariko wirinde gutoseza amababi\n• Koresha ibyatsi byinshi kugira ngo ubike ubuhehere\n• Koresha NPK 17-17-17 mu gutera, DAP mu gihe cy'indabo\n\n**Kwirinda:**\n• Hindura ibihingwa buri bihe 2-3\n• Kuraho ibihingwa birwaye ako kanya\n• Koresha kuhira kwa drip kugira ngo wirinde gutoseza amababi",
+      },
+      {
+        id: "vg2",
+        titleEn: "Cabbage, Carrots & Onions Guide",
+        titleKi: "Amabwiriza y'Amashu, Karoti n'Ibinyabuntu",
+        contentEn: "Popular market vegetables in Rwanda:\n\n**Cabbage (Amashu):**\n• Spacing: 60cm × 45cm\n• Fertilize with NPK at planting, urea after 3 weeks\n• Watch for: Diamond-back moth — use Duduthrin\n• Harvest at 70-90 days\n\n**Carrots (Karoti):**\n• Plant directly in fine, deep soil\n• Thin seedlings to 5cm apart\n• Keep soil moist but not waterlogged\n• Harvest at 90-120 days\n\n**Onions (Ibinyabuntu):**\n• Start in nursery, transplant at 6 weeks\n• Spacing: 20cm × 10cm\n• Stop watering 2 weeks before harvest\n• Cure in shade for 2 weeks after harvest\n\n**Prevention tips for all vegetables:**\n• Practice crop rotation every season\n• Use certified seeds from RAB\n• Maintain proper spacing for air flow\n• Apply organic mulch to suppress weeds\n• Scout fields weekly for early pest detection\n• Remove crop debris after harvest",
+        contentKi: "Imboga zizwi ku isoko mu Rwanda:\n\n**Amashu:**\n• Umwanya: 60cm × 45cm\n• Koresha NPK mu gutera, urea nyuma y'ibyumweru 3\n• Witondere: Inyo ya Diamond-back — koresha Duduthrin\n\n**Karoti:**\n• Tera mu butaka bwiza, burebure\n• Gera ibiterwa kuri 5cm\n• Bika ubutaka buriho amazi ariko ntibwuzure\n\n**Ibinyabuntu:**\n• Tangirira mu mashyamba, imura ku byumweru 6\n• Umwanya: 20cm × 10cm\n• Hagarika kuhira ibyumweru 2 mbere yo gusarura\n\n**Inama zo kwirinda ku mboga zose:**\n• Hindura ibihingwa buri gihembwe\n• Koresha imbuto zemejwe za RAB\n• Komeza umwanya ukwiye kugira ngo umwuka ugendere",
+      },
+      {
+        id: "vg3",
+        titleEn: "Growing Peppers & Eggplant",
+        titleKi: "Guhinga Urusenda n'Intoryi",
+        contentEn: "High-value crops for local and export markets:\n\n**Peppers (Urusenda):**\n• Varieties: Bell pepper, Chili, Scotch Bonnet\n• Start in nursery, transplant at 5-6 weeks\n• Spacing: 50cm × 40cm\n• Need full sun and well-drained soil\n• Fertilize with NPK + calcium\n\n**Eggplant (Intoryi):**\n• Very popular in Rwandan cuisine\n• Spacing: 60cm × 50cm\n• Stake plants when fruiting\n• Harvest when skin is shiny\n\n**Prevention for both:**\n• Rotate with non-solanaceae crops (beans, maize)\n• Use neem spray for aphids and whiteflies\n• Mulch to prevent soil splash diseases\n• Avoid overhead irrigation\n• Plant trap crops like marigold nearby\n• Inspect weekly and remove diseased leaves early",
+        contentKi: "Ibihingwa by'agaciro ku masoko yo mu gihugu no hanze:\n\n**Urusenda:**\n• Ubwoko: Bell pepper, Urusenda ruto, Scotch Bonnet\n• Tangirira mu mashyamba, imura ku byumweru 5-6\n• Umwanya: 50cm × 40cm\n\n**Intoryi:**\n• Ikunzwe cyane mu biribwa by'u Rwanda\n• Umwanya: 60cm × 50cm\n• Shyira ibiti byo gushyigikira iyo imbuto zitangiye\n\n**Kwirinda ku byombi:**\n• Hindura ibihingwa hamwe n'ibishyimbo, ibigori\n• Koresha umuti wa neem ku dusimba\n• Koresha ibyatsi kugira ngo wirinde indwara zo mu butaka",
+      },
+    ],
+  },
+  {
+    icon: Sprout,
+    titleKey: "kb.mushrooms",
+    descKey: "kb.mushroomsDesc",
+    articles: [
+      {
+        id: "m1",
+        titleEn: "Growing Mushrooms in Rwanda",
+        titleKi: "Guhinga Ibihumyo mu Rwanda",
+        contentEn: "Mushrooms are a profitable crop requiring small space:\n\n**Popular types:**\n• Oyster mushrooms (Ibihumyo) — Easiest to grow\n• Button mushrooms — Higher market price\n• Shiitake — Premium value\n\n**What you need:**\n• Dark, ventilated room (no direct sunlight)\n• Substrate: banana leaves, bean straw, or sawdust\n• Mushroom spawn (from research centers or cooperatives)\n• Clean water for misting\n\n**Steps:**\n1. Pasteurize substrate (soak in hot water 60°C for 1 hour)\n2. Mix spawn into cooled substrate\n3. Pack in plastic bags with small holes\n4. Keep in dark room, mist 2-3 times daily\n5. Harvest when caps are fully opened (3-4 weeks)\n\n**Prevention of contamination:**\n• Always wash hands before handling\n• Sterilize all tools and containers\n• Keep growing room clean and ventilated\n• Remove contaminated bags immediately\n• Use clean water only\n• Monitor temperature (20-28°C ideal)\n• Avoid excess moisture that causes mold",
+        contentKi: "Ibihumyo ni igihingwa cy'inyungu kenshi gikeneye umwanya muto:\n\n**Ubwoko buzwi:**\n• Ibihumyo (Oyster mushrooms) — Byoroshye guhinga\n• Button mushrooms — Igiciro kinini ku isoko\n\n**Ibyo ukeneye:**\n• Icyumba cy'umwijima, gifite umwuka (nta zuba ryinjiramo)\n• Substrate: amababi y'ibitoki, ibyatsi by'ibishyimbo, cyangwa ibyo gupanika\n• Imbuto z'ibihumyo (ziva mu bigo by'ubushakashatsi)\n\n**Kwirinda kwanduza:**\n• Buri gihe oga amaboko mbere yo gufata\n• Koza ibikoresho byose\n• Komeza icyumba cy'aho bihinzwe gisukuye\n• Kuraho amasaho yanduye ako kanya",
+      },
+    ],
+  },
+  {
+    icon: Leaf,
+    titleKey: "kb.spices",
+    descKey: "kb.spicesDesc",
+    articles: [
+      {
+        id: "sp1",
+        titleEn: "Growing Spices & Herbs in Rwanda",
+        titleKi: "Guhinga Ibirungo n'Ibinyabijumba mu Rwanda",
+        contentEn: "Spices and herbs add value and income to small farms:\n\n**Easy to start:**\n• Basil — Grows fast, harvest leaves regularly\n• Mint — Spreads easily, grow in containers\n• Rosemary — Drought tolerant, perennial\n• Lemongrass — Repels mosquitoes, easy to grow\n• Coriander — Quick harvest (30-40 days)\n\n**Higher value crops:**\n• Ginger (Tangawizi) — Plant rhizomes in rich soil, harvest at 8-10 months\n• Turmeric — Similar to ginger, needs partial shade\n• Vanilla — Needs support poles, 3 years to first harvest\n• Black pepper — Climbing vine, needs warm humid areas\n\n**Growing tips:**\n• Most herbs prefer well-drained soil\n• Harvest in morning for best flavor\n• Dry in shade for preservation\n• Plant near kitchen for easy access\n\n**Prevention of herb diseases:**\n• Avoid overwatering — most herbs prefer dry conditions\n• Ensure good drainage in planting beds\n• Space plants properly for airflow\n• Remove yellowing or spotted leaves immediately\n• Use companion planting to deter pests\n• Rotate herbs in garden beds annually",
+        contentKi: "Ibirungo n'ibinyabijumba byongerera agaciro n'inyungu ku mirima mito:\n\n**Byoroshye gutangira:**\n• Basil — Bikura vuba, sarura amababi kenshi\n• Mint — Bikwira byoroshye, bihinge mu mbehe\n• Rosemary — Bihanganira amapfa, ni ibimera by'igihe kirekire\n• Lemongrass — Birukana imibu, byoroshye guhinga\n\n**Ibihingwa by'agaciro kenshi:**\n• Tangawizi — Tera impande mu butaka bwuzuye, sarura mu mezi 8-10\n• Turmeric — Bimeze nka tangawizi, bikeneye igicucu\n• Vanille — Ikeneye inkingi, imyaka 3 kugeza ku isarura rya mbere\n\n**Kwirinda indwara z'ibinyobwa:**\n• Irinde kuhira birenze — ibinyobwa byinshi bikunda umutse\n• Reba neza ko amazi atemba neza mu murima\n• Gera ibimera neza kugira ngo umwuka ugendere",
+      },
+    ],
+  },
+  {
+    icon: Leaf,
+    titleKey: "kb.prevention",
+    descKey: "kb.preventionDesc",
+    articles: [
+      {
+        id: "pr1",
+        titleEn: "10 Golden Rules of Crop Disease Prevention",
+        titleKi: "Amategeko 10 y'Agaciro yo Kwirinda Indwara z'Ibihingwa",
+        contentEn: "Follow these rules to keep your farm healthy:\n\n**1. Crop Rotation:** Never plant the same crop family in the same spot for 2+ seasons. Rotate cereals → legumes → root crops.\n\n**2. Clean Seeds:** Always use certified, disease-free seeds from RAB or trusted suppliers.\n\n**3. Proper Spacing:** Crowded plants trap moisture and spread disease. Follow recommended spacing.\n\n**4. Field Hygiene:** Remove and burn diseased plants. Never compost infected material.\n\n**5. Tool Disinfection:** Clean tools with bleach solution when moving between fields.\n\n**6. Drainage:** Ensure water doesn't pool around crops. Use raised beds on flat land.\n\n**7. Mulching:** Cover soil with organic mulch to prevent soil-splash diseases and retain moisture.\n\n**8. Timely Planting:** Plant at the right time to avoid peak pest and disease pressure.\n\n**9. Resistant Varieties:** Choose varieties bred for disease resistance (ask RAB for latest recommendations).\n\n**10. Regular Scouting:** Walk your field weekly. Catching problems early saves your entire crop.\n\n**Bonus:** Keep records of what you planted where and what problems occurred. This helps plan better rotations.",
+        contentKi: "Kurikiza aya mategeko kugira ngo umurima wawe ugume muzima:\n\n**1. Guhindura ibihingwa:** Ntukagere gutera umuryango umwe w'ibihingwa aho hamwe mu bihe 2+.\n\n**2. Imbuto zisukuye:** Buri gihe koresha imbuto zemejwe zidafite indwara.\n\n**3. Umwanya ukwiye:** Ibihingwa byegeranye bifata ubuhehere kandi bikwirakwiza indwara.\n\n**4. Isuku y'umurima:** Kuraho kandi utwike ibihingwa birwaye.\n\n**5. Gusukura ibikoresho:** Koza ibikoresho na zabiringa iyo uhindura imirima.\n\n**6. Gutemba kw'amazi:** Reba neza ko amazi adahagarara hafi y'ibihingwa.\n\n**7. Gukoresha ibyatsi:** Funika ubutaka n'ibyatsi kugira ngo wirinde indwara zo mu butaka.\n\n**8. Gutera ku gihe:** Tera ku gihe kiza kugira ngo wirinde ibyonnyi n'indwara.\n\n**9. Ubwoko burwanya:** Hitamo ubwoko bwubatswe kurwanya indwara.\n\n**10. Gusuzuma kenshi:** Genda mu murima wawe buri cyumweru.",
+      },
+      {
+        id: "pr2",
+        titleEn: "Organic Prevention Methods",
+        titleKi: "Uburyo bwo Kwirinda Ukoresheje Ibidukikije",
+        contentEn: "Natural ways to protect your crops without chemicals:\n\n**Companion Planting:**\n• Marigolds repel nematodes and whiteflies\n• Basil near tomatoes deters aphids\n• Onions near carrots repel carrot fly\n• Lemongrass around field edges repels many pests\n\n**Biological Controls:**\n• Encourage birds — they eat caterpillars and insects\n• Ladybugs eat aphids naturally\n• Praying mantis eat many harmful insects\n\n**Homemade Sprays:**\n• Ash + water: repels soft-bodied insects\n• Garlic + chili + soap spray: broad-spectrum pest repellent\n• Neem leaf tea: natural fungicide and insecticide\n• Papaya leaf extract: controls some fungal diseases\n\n**Soil Health:**\n• Add compost regularly for beneficial microbes\n• Use cover crops (beans, clover) between seasons\n• Avoid burning crop residues — incorporate them\n• Maintain soil pH 5.5-7.0 with lime if needed\n\n**Physical Barriers:**\n• Use nets to protect seedlings from birds\n• Yellow sticky traps for whiteflies\n• Hand-pick large caterpillars early morning\n• Use trenches around fields for slug control",
+        contentKi: "Uburyo bw'ibidukikije bwo kurinda ibihingwa byawe nta miti:\n\n**Gutera hamwe:**\n• Ibirunga birukana udukoko tw'imitsi n'inyenzi\n• Basil hafi y'inyanya irukana udusimba\n• Ibinyabuntu hafi ya karoti birukana isazi ya karoti\n\n**Gukoresha ibinyabuzima:**\n• Shishikariza inyoni — zirya inyo n'udukoko\n• Ladybugs zirya udusimba ku buryo bw'ibidukikije\n\n**Imiti yo mu rugo:**\n• Ivu + amazi: irukana udukoko dutoya\n• Tungurusumu + urusenda + isabune: irukana ibyonnyi byinshi\n• Icyayi cy'amababi ya neem: umuti w'ibidukikije\n\n**Ubuzima bw'ubutaka:**\n• Ongeramo ifumbire kenshi\n• Koresha ibihingwa bigabanya hagati y'ibihe\n• Irinde gutwika ibisigaye by'ibihingwa",
+      },
+      {
+        id: "pr3",
+        titleEn: "Post-Harvest Prevention & Storage",
+        titleKi: "Kwirinda Nyuma yo Gusarura no Kubika",
+        contentEn: "Preventing losses after harvest is just as important:\n\n**Grain Storage:**\n• Dry grains to 13% moisture before storage\n• Use hermetic bags (PICS bags) for maize and beans\n• Add dried neem leaves or ash to repel storage pests\n• Store in raised, ventilated structures\n• Check monthly for insects or moisture\n\n**Root Crops:**\n• Harvest carefully — don't bruise\n• Cure sweet potatoes in shade for 5-7 days\n• Store cassava chips after drying\n• Irish potatoes: store in cool, dark place with ventilation\n\n**Vegetables & Fruits:**\n• Harvest in cool morning hours\n• Handle gently — bruises lead to rot\n• Sort out damaged produce immediately\n• Sell or process within 2-3 days\n• Consider sun-drying, pickling, or jam-making for preservation\n\n**Prevention of storage pests:**\n• Clean storage area before new harvest\n• Repair cracks and holes in storage buildings\n• Use Actellic Super dust for severe infestations\n• Never mix old and new grain\n• Keep cats or set traps for rodents",
+        contentKi: "Kwirinda igihombo nyuma yo gusarura ni ingenzi cyane:\n\n**Kubika ibinyampeke:**\n• Umisha ibinyampeke kuri 13% y'ubuhehere mbere yo kubika\n• Koresha amasaho ya PICS ku bigori n'ibishyimbo\n• Ongeramo amababi y'umuyumbu cyangwa ivu kugira ngo wirinde udukoko\n• Bika mu bihingwa bishyizwe hejuru, bifite umwuka\n\n**Ibihingwa by'imizi:**\n• Sarura witonze — ntubimene\n• Umisha ibijumba mu gicucu iminsi 5-7\n\n**Imboga n'imbuto:**\n• Sarura mu gitondo gukonje\n• Fata uwitonze — ibimena bitera kubora\n• Gutandukanya ibyangirika ako kanya",
+      },
+    ],
+  },
 ];
 
 // Tutorial videos data
