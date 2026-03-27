@@ -5,6 +5,7 @@ import { MobileLayout } from "@/components/MobileLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface RecentItem {
   id: string;
