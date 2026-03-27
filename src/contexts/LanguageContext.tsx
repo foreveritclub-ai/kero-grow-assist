@@ -91,6 +91,14 @@ const translations: Record<string, Record<Lang, string>> = {
   "kb.flowersDesc": { en: "Growing flowers for local and export markets", ki: "Guhinga indabo ku isoko ry'imbere n'iry'amahanga" },
   "kb.trees": { en: "Trees & Agroforestry", ki: "Ibiti n'ubuhinzi bw'ibiti" },
   "kb.treesDesc": { en: "Tree planting and agroforestry practices", ki: "Gutera ibiti n'imikorere y'ubuhinzi bw'ibiti" },
+  "kb.vegetables": { en: "🪴 Vegetables", ki: "🪴 Imboga" },
+  "kb.vegetablesDesc": { en: "Tomatoes, cabbage, peppers and more", ki: "Inyanya, amashu, urusenda n'ibindi" },
+  "kb.mushrooms": { en: "🍄 Mushrooms", ki: "🍄 Ibihumyo" },
+  "kb.mushroomsDesc": { en: "Growing mushrooms for food and income", ki: "Guhinga ibihumyo ku biryo n'inyungu" },
+  "kb.spices": { en: "🌿 Spices & Herbs", ki: "🌿 Ibirungo n'Ibinyabijumba" },
+  "kb.spicesDesc": { en: "Growing spices, herbs and aromatic plants", ki: "Guhinga ibirungo n'ibimera bihumura" },
+  "kb.prevention": { en: "🛡️ Prevention Guide", ki: "🛡️ Amabwiriza yo Kwirinda" },
+  "kb.preventionDesc": { en: "Disease prevention, organic methods & storage", ki: "Kwirinda indwara, uburyo bw'ibidukikije no kubika" },
 
   // Community Q&A
   "community.title": { en: "Community Q&A", ki: "Ibibazo n'Ibisubizo" },
