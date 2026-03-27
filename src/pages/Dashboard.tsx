@@ -106,7 +106,32 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="px-5 mt-6 mb-4">
+      {/* Download App Button */}
+      <div className="px-5 mt-4">
+        <button
+          onClick={() => {
+            const w = window as any;
+            if (w.deferredPWAPrompt) {
+              w.deferredPWAPrompt.prompt();
+              w.deferredPWAPrompt.userChoice.then(() => { w.deferredPWAPrompt = null; });
+            } else {
+              toast({
+                title: lang === "ki" ? "Kwinjiza Kero" : "Install Kero",
+                description: lang === "ki"
+                  ? "Kanda 'Share' hanyuma 'Add to Home Screen' kuri Safari, cyangwa menu kuri Chrome."
+                  : "Tap 'Share' then 'Add to Home Screen' on Safari, or use Chrome's menu.",
+              });
+            }
+          }}
+          className="w-full flex items-center gap-3 bg-primary/10 rounded-xl px-4 py-3.5 active:bg-primary/20 transition-colors"
+        >
+          <Download className="w-5 h-5 text-primary" />
+          <span className="font-display text-sm font-semibold text-primary">
+            {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Download Kero App"}
+          </span>
+        </button>
+      </div>
+
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-display font-bold text-base">{t("dash.recentActivity")}</h2>
           <button onClick={() => navigate("/history")} className="text-xs text-primary font-semibold">{t("dash.viewAll")}</button>
