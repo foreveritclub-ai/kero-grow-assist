@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Bell, BellOff, Droplets, Flower2, Bug, Clock, Volume2, VolumeX, Loader2 } from "lucide-react";
+import { ArrowLeft, Bell, Droplets, Flower2, Bug, Clock, Volume2, VolumeX, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -25,7 +25,7 @@ function getTTSDisabledUntil(): string | null {
 
 export default function SettingsPage() {
   const navigate = useNavigate();
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -86,9 +86,8 @@ export default function SettingsPage() {
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
-          // Using a placeholder VAPID key - in production this should be configured
           "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkOs-N7BOy0pS9q3c-fptj1ItMGS3rJENETjBpe6HI"
-        ),
+        ) as BufferSource,
       });
       if (user) {
         const sub = subscription.toJSON();
