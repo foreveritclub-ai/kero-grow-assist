@@ -1,9 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
+const TTS_DISABLED_KEY = "kero_tts_disabled_until";
+
+export function isTTSDisabled(): boolean {
+  const until = localStorage.getItem(TTS_DISABLED_KEY);
+  if (!until) return false;
+  return new Date(until) > new Date();
+}
+
 /**
  * Smart Voice Assistant using Web Speech API
  * Selects the most natural-sounding voice available on the device
- * Supports English and Kinyarwanda (falls back to English for Kinyarwanda if no native voice)
+ * Supports English and Kinyarwanda
  */
 
 function getBestVoice(lang: "en" | "ki"): SpeechSynthesisVoice | null {
@@ -48,11 +56,13 @@ export function useVoiceAssistant() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
   const [voicesLoaded, setVoicesLoaded] = useState(false);
+  const [disabled, setDisabled] = useState(isTTSDisabled());
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   useEffect(() => {
-    const supported = "speechSynthesis" in window;
+    const supported = "speechSynthesis" in window && !isTTSDisabled();
     setIsSupported(supported);
+    setDisabled(isTTSDisabled());
     if (!supported) return;
 
     const loadVoices = () => {
