@@ -3,6 +3,7 @@ import { ArrowLeft, BookOpen, Bug, Droplets, Leaf, Sun, ChevronRight, Sprout, Fl
 import { useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SpeakButton } from "@/components/SpeakButton";
 
 interface KBArticle {
   id: string;
@@ -311,6 +312,14 @@ export default function KnowledgeBase() {
           </div>
         </div>
         <div className="px-5 mt-5 mb-4">
+          {/* Listen to article */}
+          <SpeakButton
+            text={lang === "ki" ? selectedArticle.contentKi : selectedArticle.contentEn}
+            lang={lang}
+            size="md"
+            label={lang === "ki" ? "🔊 Tegera iki gisomo" : "🔊 Listen to this lesson"}
+            className="w-full justify-center mb-4"
+          />
           <div className="bg-card rounded-xl border border-border p-5">
             <div className="prose prose-sm max-w-none">
               {(lang === "ki" ? selectedArticle.contentKi : selectedArticle.contentEn).split("\n").map((line, i) => {
