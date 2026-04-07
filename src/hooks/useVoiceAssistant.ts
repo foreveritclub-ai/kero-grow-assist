@@ -124,5 +124,5 @@ export function useVoiceAssistant() {
     }
   }, [isSpeaking, speak, stop]);
 
-  return { speak, stop, toggle, isSpeaking, isSupported };
+  return { speak, stop, toggle, isSpeaking, isSupported, disabled };
 }
