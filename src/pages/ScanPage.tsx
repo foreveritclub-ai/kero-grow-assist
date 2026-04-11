@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useOfflineCache } from "@/hooks/useOfflineCache";
 
 export default function ScanPage() {
   const navigate = useNavigate();
