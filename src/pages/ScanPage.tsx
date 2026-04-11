@@ -142,6 +142,8 @@ export default function ScanPage() {
       setResult(diagnosis);
       const diagId = await saveDiagnosis(diagnosis);
       setLastDiagnosisId(diagId);
+      // Cache offline
+      cacheOffline(diagnosis, cropName, mode, diagId || undefined);
     } catch (err: any) {
       console.error("Diagnosis error:", err);
       toast({
