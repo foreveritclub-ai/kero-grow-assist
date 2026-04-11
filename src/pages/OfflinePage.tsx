@@ -40,7 +40,7 @@ function CropItem({ crop, lang }: { crop: CropInfo; lang: string }) {
           </div>
           <SpeakButton
             text={`${lang === "ki" ? crop.name_ki : crop.name_en}. ${(lang === "ki" ? crop.tips_ki : crop.tips_en).join(". ")}. ${lang === "ki" ? "Ibibazo bisanzwe" : "Common issues"}: ${(lang === "ki" ? crop.common_issues_ki : crop.common_issues_en).join(", ")}`}
-            lang={lang}
+            lang={lang as "en" | "ki"}
             label={lang === "ki" ? "Tegera" : "Listen"}
           />
         </div>
