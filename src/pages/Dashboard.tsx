@@ -73,13 +73,30 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-primary-foreground/10 rounded-xl p-4 flex items-center gap-3">
-          <Sprout className="w-8 h-8 text-secondary" />
-          <div>
-            <p className="text-primary-foreground/70 text-xs font-body">{t("dash.yourFarms")}</p>
-            <p className="text-primary-foreground font-display font-bold text-lg">{farmCount} {t("dash.cropsTracked")}</p>
+        {farmCount > 0 ? (
+          <div className="bg-primary-foreground/10 rounded-xl p-4 flex items-center gap-3">
+            <Sprout className="w-8 h-8 text-secondary" />
+            <div>
+              <p className="text-primary-foreground/70 text-xs font-body">{t("dash.yourFarms")}</p>
+              <p className="text-primary-foreground font-display font-bold text-lg">{farmCount} {t("dash.cropsTracked")}</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <button
+            onClick={() => navigate("/scan")}
+            className="w-full bg-primary-foreground/10 rounded-xl p-4 flex items-center gap-3 active:scale-95 transition-transform"
+          >
+            <Camera className="w-8 h-8 text-secondary" />
+            <div className="text-left">
+              <p className="text-primary-foreground font-display font-bold text-sm">
+                {lang === "ki" ? "📷 Fata ifoto y'igihingwa cyawe utangire" : "📷 Take a photo of your plant to start"}
+              </p>
+              <p className="text-primary-foreground/60 text-xs font-body mt-0.5">
+                {lang === "ki" ? "Kero azagufasha kumenya ikibazo" : "Kero will help identify the problem"}
+              </p>
+            </div>
+          </button>
+        )}
       </div>
 
       <div className="px-5 -mt-4">
@@ -138,11 +155,18 @@ export default function Dashboard() {
           <button onClick={() => navigate("/history")} className="text-xs text-primary font-semibold">{t("dash.viewAll")}</button>
         </div>
         {recent.length === 0 ? (
-          <div className="bg-card rounded-xl border border-border p-6 flex flex-col items-center justify-center text-center">
-            <BookOpen className="w-10 h-10 text-muted-foreground/40 mb-2" />
-            <p className="text-sm text-muted-foreground">{t("dash.noActivity")}</p>
-            <p className="text-xs text-muted-foreground/70 mt-1">{t("dash.noActivityDesc")}</p>
-          </div>
+          <button
+            onClick={() => navigate("/scan")}
+            className="w-full bg-card rounded-xl border border-border p-6 flex flex-col items-center justify-center text-center active:scale-95 transition-transform"
+          >
+            <Camera className="w-10 h-10 text-primary/40 mb-2" />
+            <p className="text-sm font-display font-semibold text-foreground">
+              {lang === "ki" ? "📷 Fata ifoto y'igihingwa cyawe" : "📷 Take a photo of your plant"}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {lang === "ki" ? "Kero azakubwira ikibazo n'igisubizo" : "Kero will tell you the problem and solution"}
+            </p>
+          </button>
         ) : (
           <div className="space-y-2">
             {recent.map((item) => (
@@ -153,6 +177,7 @@ export default function Dashboard() {
                 <div className="flex-1 min-w-0">
                   <p className="font-display font-semibold text-sm truncate">{item.crop_name || "—"}</p>
                   <p className="text-xs text-muted-foreground truncate">
+                    {item.severity === "danger" ? "⚠️ " : item.severity === "warning" ? "⚠️ " : "✅ "}
                     {lang === "ki" ? item.disease_or_issue_ki : item.disease_or_issue_en}
                   </p>
                 </div>
