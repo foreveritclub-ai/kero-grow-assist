@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Camera, Upload, Keyboard, Sparkles, ArrowLeft, Loader2, Mic, MicOff, Plus } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
@@ -26,6 +26,7 @@ export default function ScanPage() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [lastDiagnosisId, setLastDiagnosisId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const { saveDiagnosis: cacheOffline } = useOfflineCache();
 
   // Voice input state
   const [isListening, setIsListening] = useState(false);
