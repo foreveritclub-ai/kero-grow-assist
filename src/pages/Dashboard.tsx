@@ -123,8 +123,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Download App Button */}
-      <div className="px-5 mt-4">
+      {/* Download & Offline Buttons */}
+      <div className="px-5 mt-4 space-y-2">
         <button
           onClick={() => {
             const w = window as any;
@@ -146,6 +146,20 @@ export default function Dashboard() {
           <span className="font-display text-sm font-semibold text-primary">
             {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Download Kero App"}
           </span>
+        </button>
+        <button
+          onClick={() => navigate("/offline")}
+          className="w-full flex items-center gap-3 bg-accent/10 rounded-xl px-4 py-3.5 active:bg-accent/20 transition-colors"
+        >
+          <WifiOff className="w-5 h-5 text-accent" />
+          <div className="text-left flex-1">
+            <span className="font-display text-sm font-semibold text-accent block">
+              {lang === "ki" ? "📴 Korera Offline" : "📴 Offline Mode"}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {lang === "ki" ? "Reba ibihingwa 100+ n'isuzuma zibitswe" : "Browse 100+ crops & saved diagnoses"}
+            </span>
+          </div>
         </button>
       </div>
 
