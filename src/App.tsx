@@ -12,6 +12,7 @@ import KnowledgeBase from "./pages/KnowledgeBase";
 import ProfilePage from "./pages/ProfilePage";
 import AuthPage from "./pages/AuthPage";
 import HistoryPage from "./pages/HistoryPage";
+import OfflinePage from "./pages/OfflinePage";
 import CommunityPage from "./pages/CommunityPage";
 import WeatherPage from "./pages/WeatherPage";
 import SettingsPage from "./pages/SettingsPage";
@@ -40,6 +41,7 @@ const AppRoutes = () => (
     <Route path="/knowledge" element={<ProtectedRoute><KnowledgeBase /></ProtectedRoute>} />
     <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
     <Route path="/history" element={<ProtectedRoute><HistoryPage /></ProtectedRoute>} />
+    <Route path="/offline" element={<ProtectedRoute><OfflinePage /></ProtectedRoute>} />
     <Route path="/community" element={<ProtectedRoute><CommunityPage /></ProtectedRoute>} />
     <Route path="/weather" element={<ProtectedRoute><WeatherPage /></ProtectedRoute>} />
     <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
