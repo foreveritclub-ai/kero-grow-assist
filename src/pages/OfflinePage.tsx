@@ -139,9 +139,17 @@ export default function OfflinePage() {
             </p>
 
             <div className="space-y-2">
-              {filtered.map((crop) => (
+              {visible.map((crop) => (
                 <CropItem key={crop.name_en} crop={crop} lang={lang} />
               ))}
+              {visibleCount < filtered.length && (
+                <button
+                  onClick={() => setVisibleCount((v) => v + 30)}
+                  className="w-full py-3 rounded-xl bg-primary/10 text-primary font-display font-bold text-sm active:scale-95 transition-transform"
+                >
+                  {lang === "ki" ? `Erekana ibindi (${filtered.length - visibleCount} bisigaye)` : `Show more (${filtered.length - visibleCount} remaining)`}
+                </button>
+              )}
             </div>
           </div>
         ) : (
