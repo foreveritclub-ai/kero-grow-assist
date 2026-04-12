@@ -126,26 +126,18 @@ export default function Dashboard() {
       {/* Download & Offline Buttons */}
       <div className="px-5 mt-4 space-y-2">
         <button
-          onClick={() => {
-            const w = window as any;
-            if (w.deferredPWAPrompt) {
-              w.deferredPWAPrompt.prompt();
-              w.deferredPWAPrompt.userChoice.then(() => { w.deferredPWAPrompt = null; });
-            } else {
-              toast({
-                title: lang === "ki" ? "Kwinjiza Kero" : "Install Kero",
-                description: lang === "ki"
-                  ? "Kanda 'Share' hanyuma 'Add to Home Screen' kuri Safari, cyangwa menu kuri Chrome."
-                  : "Tap 'Share' then 'Add to Home Screen' on Safari, or use Chrome's menu.",
-              });
-            }
-          }}
-          className="w-full flex items-center gap-3 bg-primary/10 rounded-xl px-4 py-3.5 active:bg-primary/20 transition-colors"
+          onClick={() => navigate("/install")}
+          className="w-full flex items-center gap-3 bg-accent rounded-xl px-4 py-4 active:scale-95 transition-transform shadow-md"
         >
-          <Download className="w-5 h-5 text-primary" />
-          <span className="font-display text-sm font-semibold text-primary">
-            {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Download Kero App"}
-          </span>
+          <Download className="w-6 h-6 text-accent-foreground" />
+          <div className="text-left flex-1">
+            <span className="font-display text-sm font-bold text-accent-foreground block">
+              {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Install Kero App"}
+            </span>
+            <span className="text-xs text-accent-foreground/70">
+              {lang === "ki" ? "Kanda hano — nta App Store" : "One tap — no App Store needed"}
+            </span>
+          </div>
         </button>
         <button
           onClick={() => navigate("/offline")}

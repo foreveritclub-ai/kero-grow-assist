@@ -141,25 +141,12 @@ export default function ProfilePage() {
         )}
 
         <button
-          onClick={() => {
-            const w = window as any;
-            if (w.deferredPWAPrompt) {
-              w.deferredPWAPrompt.prompt();
-              w.deferredPWAPrompt.userChoice.then(() => { w.deferredPWAPrompt = null; });
-            } else {
-              toast({
-                title: lang === "ki" ? "Kwinjiza Kero" : "Install Kero",
-                description: lang === "ki"
-                  ? "Kanda 'Share' hanyuma 'Add to Home Screen' kuri Safari, cyangwa menu kuri Chrome."
-                  : "Tap 'Share' then 'Add to Home Screen' on Safari, or use Chrome's menu.",
-              });
-            }
-          }}
-          className="w-full flex items-center gap-3 bg-primary/10 rounded-xl px-4 py-3.5 active:bg-primary/20 transition-colors"
+          onClick={() => navigate("/install")}
+          className="w-full flex items-center gap-3 bg-accent rounded-xl px-4 py-3.5 active:scale-95 transition-transform"
         >
-          <Download className="w-5 h-5 text-primary" />
-          <span className="font-display text-sm font-semibold text-primary">
-            {lang === "ki" ? "Injiza Kero ku telefoni" : "Install Kero App"}
+          <Download className="w-5 h-5 text-accent-foreground" />
+          <span className="font-display text-sm font-semibold text-accent-foreground">
+            {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Install Kero App"}
           </span>
         </button>
 
