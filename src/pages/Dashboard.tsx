@@ -124,34 +124,24 @@ export default function Dashboard() {
       </div>
 
       {/* Download & Offline Buttons */}
-      <div className="px-5 mt-4 space-y-2">
+      <div className="px-5 mt-4 space-y-3">
         <button
           onClick={() => navigate("/install")}
-          className="w-full flex items-center gap-3 bg-accent rounded-xl px-4 py-4 active:scale-95 transition-transform shadow-md"
+          className="w-full flex items-center justify-center gap-3 bg-muted/60 backdrop-blur-sm border border-border/50 rounded-full px-6 py-4 active:scale-95 transition-all hover:bg-muted/80"
         >
-          <Download className="w-6 h-6 text-accent-foreground" />
-          <div className="text-left flex-1">
-            <span className="font-display text-sm font-bold text-accent-foreground block">
-              {lang === "ki" ? "⬇️ Injiza Kero ku telefoni" : "⬇️ Install Kero App"}
-            </span>
-            <span className="text-xs text-accent-foreground/70">
-              {lang === "ki" ? "Kanda hano — nta App Store" : "One tap — no App Store needed"}
-            </span>
-          </div>
+          <Download className="w-5 h-5 text-foreground" />
+          <span className="font-display text-base font-semibold text-foreground">
+            {lang === "ki" ? "Pakurura App" : "Download App"}
+          </span>
         </button>
         <button
           onClick={() => navigate("/offline")}
-          className="w-full flex items-center gap-3 bg-accent/10 rounded-xl px-4 py-3.5 active:bg-accent/20 transition-colors"
+          className="w-full flex items-center justify-center gap-3 bg-muted/30 border border-border/30 rounded-full px-6 py-3.5 active:scale-95 transition-all hover:bg-muted/50"
         >
-          <WifiOff className="w-5 h-5 text-accent" />
-          <div className="text-left flex-1">
-            <span className="font-display text-sm font-semibold text-accent block">
-              {lang === "ki" ? "📴 Korera Offline" : "📴 Offline Mode"}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              {lang === "ki" ? "Reba ibihingwa 100+ n'isuzuma zibitswe" : "Browse 100+ crops & saved diagnoses"}
-            </span>
-          </div>
+          <WifiOff className="w-4 h-4 text-muted-foreground" />
+          <span className="font-display text-sm font-medium text-muted-foreground">
+            {lang === "ki" ? "📴 Korera Offline" : "📴 Offline Mode"}
+          </span>
         </button>
       </div>
 
