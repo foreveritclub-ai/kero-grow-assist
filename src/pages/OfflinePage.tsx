@@ -57,12 +57,17 @@ export default function OfflinePage() {
   const [tab, setTab] = useState<"crops" | "history">("crops");
   const [selectedCat, setSelectedCat] = useState<string | null>(null);
 
+  const [visibleCount, setVisibleCount] = useState(30);
   const categories = useMemo(() => getCropCategories(), []);
   const filtered = useMemo(() => {
     let results = searchCrops(query);
     if (selectedCat) results = results.filter((c) => c.category_en === selectedCat);
     return results;
   }, [query, selectedCat]);
+  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+
+  // Reset visible count when filter changes
+  useMemo(() => { setVisibleCount(30); }, [query, selectedCat]);
 
   return (
     <MobileLayout>
