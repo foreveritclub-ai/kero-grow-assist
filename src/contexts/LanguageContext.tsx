@@ -114,6 +114,10 @@ const translations: Record<string, Record<Lang, string>> = {
   "weather.cropAlerts": { en: "Crop Alerts", ki: "Impanuro z'ibihingwa" },
   "weather.forecast": { en: "7-Day Forecast", ki: "Iteganyakirere ry'iminsi 7" },
 
+  // Crop Calendar
+  "calendar.title": { en: "Crop Calendar", ki: "Kalandariye y'Ibihingwa" },
+  "calendar.subtitle": { en: "Planting & harvesting seasons", ki: "Ibihe byo gutera no gusarura" },
+
   // Profile
   "profile.title": { en: "Profile", ki: "Umwirondoro" },
   "profile.farmer": { en: "Farmer", ki: "Umuhinzi" },
