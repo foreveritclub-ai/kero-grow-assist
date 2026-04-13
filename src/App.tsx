@@ -16,6 +16,7 @@ import OfflinePage from "./pages/OfflinePage";
 import CommunityPage from "./pages/CommunityPage";
 import WeatherPage from "./pages/WeatherPage";
 import SettingsPage from "./pages/SettingsPage";
+import CropCalendarPage from "./pages/CropCalendarPage";
 import InstallPage from "./pages/InstallPage";
 import NotFound from "./pages/NotFound";
 import { Loader2 } from "lucide-react";
@@ -46,6 +47,7 @@ const AppRoutes = () => (
     <Route path="/community" element={<ProtectedRoute><CommunityPage /></ProtectedRoute>} />
     <Route path="/weather" element={<ProtectedRoute><WeatherPage /></ProtectedRoute>} />
     <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+    <Route path="/calendar" element={<ProtectedRoute><CropCalendarPage /></ProtectedRoute>} />
     <Route path="/install" element={<InstallPage />} />
     <Route path="*" element={<NotFound />} />
   </Routes>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {
   ArrowLeft, Bell, Droplets, Flower2, Bug, Clock, Volume2, VolumeX,
-  Loader2, MapPin, Globe, Moon, Sun, Smartphone,
+  Loader2, MapPin, Globe, Smartphone,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
