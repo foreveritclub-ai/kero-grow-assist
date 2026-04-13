@@ -1,4 +1,4 @@
-import { Camera, Keyboard, Sprout, TrendingUp, BookOpen, Clock, MessageSquare, CloudSun, Download, WifiOff } from "lucide-react";
+import { Camera, Keyboard, Sprout, TrendingUp, BookOpen, Clock, MessageSquare, CloudSun, Download, WifiOff, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MobileLayout } from "@/components/MobileLayout";
@@ -44,6 +44,7 @@ export default function Dashboard() {
     { icon: Sprout, titleKey: "dash.farmTracker", descKey: "dash.farmTrackerDesc", path: "/farm", variant: "primary" as const },
     { icon: TrendingUp, titleKey: "dash.harvestPrediction", descKey: "dash.harvestDesc", path: "/scan?mode=text", variant: "primary" as const },
     { icon: CloudSun, titleKey: "weather.title", descKey: "weather.subtitle", path: "/weather", variant: "primary" as const },
+    { icon: CalendarDays, titleKey: "calendar.title", descKey: "calendar.subtitle", path: "/calendar", variant: "primary" as const },
     { icon: MessageSquare, titleKey: "community.title", descKey: "community.subtitle", path: "/community", variant: "primary" as const },
   ];
 
