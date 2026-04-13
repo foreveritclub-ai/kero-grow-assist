@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Bell, Droplets, Flower2, Bug, Clock, Volume2, VolumeX, Loader2 } from "lucide-react";
+import {
+  ArrowLeft, Bell, Droplets, Flower2, Bug, Clock, Volume2, VolumeX,
+  Loader2, MapPin, Globe, Moon, Sun, Smartphone,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/MobileLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -8,8 +11,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { RWANDA_ZONES, WeatherZone } from "@/data/cropCalendar";
 
 const TTS_DISABLED_KEY = "kero_tts_disabled_until";
+const ZONE_KEY = "kero_farm_zone";
 
 function isTTSDisabled(): boolean {
   const until = localStorage.getItem(TTS_DISABLED_KEY);
@@ -25,10 +30,11 @@ function getTTSDisabledUntil(): string | null {
 
 export default function SettingsPage() {
   const navigate = useNavigate();
-  const { lang } = useLanguage();
+  const { lang, setLang } = useLanguage();
   const { user } = useAuth();
   const { toast } = useToast();
 
+  // Notification prefs
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [wateringEnabled, setWateringEnabled] = useState(true);
@@ -38,14 +44,15 @@ export default function SettingsPage() {
   const [ttsDisabled, setTtsDisabled] = useState(isTTSDisabled());
   const [notificationsPermission, setNotificationsPermission] = useState<NotificationPermission>("default");
 
+  // Zone
+  const [zone, setZone] = useState<WeatherZone>(() => (localStorage.getItem(ZONE_KEY) as WeatherZone) || "kigali");
+
   useEffect(() => {
-    if ("Notification" in window) {
-      setNotificationsPermission(Notification.permission);
-    }
+    if ("Notification" in window) setNotificationsPermission(Notification.permission);
   }, []);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) { setLoading(false); return; }
     supabase
       .from("notification_preferences")
       .select("*")
@@ -64,18 +71,13 @@ export default function SettingsPage() {
 
   const requestNotificationPermission = async () => {
     if (!("Notification" in window)) {
-      toast({
-        title: lang === "ki" ? "Ntabwo bikunze" : "Not supported",
-        description: lang === "ki" ? "Mushakisha yawe ntishyigikira notifications" : "Your browser doesn't support notifications",
-        variant: "destructive",
-      });
+      toast({ title: lang === "ki" ? "Ntabwo bikunze" : "Not supported", description: lang === "ki" ? "Mushakisha yawe ntishyigikira notifications" : "Your browser doesn't support notifications", variant: "destructive" });
       return;
     }
     const permission = await Notification.requestPermission();
     setNotificationsPermission(permission);
     if (permission === "granted") {
       toast({ title: lang === "ki" ? "Notifications zemejwe!" : "Notifications enabled!" });
-      // Register push subscription
       registerPushSubscription();
     }
   };
@@ -85,9 +87,7 @@ export default function SettingsPage() {
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkOs-N7BOy0pS9q3c-fptj1ItMGS3rJENETjBpe6HI"
-        ) as BufferSource,
+        applicationServerKey: urlBase64ToUint8Array("BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkOs-N7BOy0pS9q3c-fptj1ItMGS3rJENETjBpe6HI") as BufferSource,
       });
       if (user) {
         const sub = subscription.toJSON();
@@ -140,6 +140,12 @@ export default function SettingsPage() {
     }
   };
 
+  const handleZoneChange = (z: WeatherZone) => {
+    setZone(z);
+    localStorage.setItem(ZONE_KEY, z);
+    toast({ title: lang === "ki" ? "Akarere kahindutse" : "Zone updated" });
+  };
+
   const ttsUntil = getTTSDisabledUntil();
 
   return (
@@ -156,15 +162,49 @@ export default function SettingsPage() {
       </div>
 
       <div className="px-5 mt-5 space-y-4 mb-4">
-        {/* Notifications Section */}
-        <div className="bg-card rounded-xl border border-border p-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Bell className="w-5 h-5 text-primary" />
-            <h2 className="font-display font-bold text-sm">
-              {lang === "ki" ? "Notifications z'ubuhinzi" : "Farming Notifications"}
-            </h2>
+        {/* Language Section */}
+        <SettingsSection icon={Globe} title={lang === "ki" ? "Ururimi" : "Language"}>
+          <div className="flex gap-2">
+            {(["en", "ki"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={`flex-1 py-2.5 rounded-lg text-sm font-display font-semibold transition-colors ${
+                  lang === l ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                }`}
+              >
+                {l === "en" ? "English" : "Kinyarwanda"}
+              </button>
+            ))}
           </div>
+        </SettingsSection>
 
+        {/* Farm Zone Section */}
+        <SettingsSection icon={MapPin} title={lang === "ki" ? "Akarere k'ubuhinzi" : "Farm Zone"}>
+          <div className="space-y-2">
+            {(Object.keys(RWANDA_ZONES) as WeatherZone[]).map((z) => (
+              <button
+                key={z}
+                onClick={() => handleZoneChange(z)}
+                className={`w-full text-left p-3 rounded-lg border transition-colors ${
+                  zone === z
+                    ? "border-primary bg-primary/5"
+                    : "border-border bg-card hover:bg-muted/50"
+                }`}
+              >
+                <p className={`font-display font-semibold text-sm ${zone === z ? "text-primary" : ""}`}>
+                  {lang === "ki" ? RWANDA_ZONES[z].ki : RWANDA_ZONES[z].en}
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {lang === "ki" ? RWANDA_ZONES[z].description_ki : RWANDA_ZONES[z].description_en}
+                </p>
+              </button>
+            ))}
+          </div>
+        </SettingsSection>
+
+        {/* Notifications Section */}
+        <SettingsSection icon={Bell} title={lang === "ki" ? "Notifications z'ubuhinzi" : "Farming Notifications"}>
           {notificationsPermission !== "granted" && (
             <button
               onClick={requestNotificationPermission}
@@ -186,59 +226,33 @@ export default function SettingsPage() {
           )}
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Droplets className="w-4 h-4 text-blue-500" />
-                <div>
-                  <p className="font-display font-semibold text-sm">
-                    {lang === "ki" ? "Kuvomera" : "Watering Reminders"}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {lang === "ki" ? "Uburira bwo kuhira ibihingwa" : "Reminders to water your crops"}
-                  </p>
-                </div>
-              </div>
-              <Switch checked={wateringEnabled} onCheckedChange={setWateringEnabled} />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Flower2 className="w-4 h-4 text-green-500" />
-                <div>
-                  <p className="font-display font-semibold text-sm">
-                    {lang === "ki" ? "Ifumbire" : "Fertilization Alerts"}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {lang === "ki" ? "Igihe cyo gushyira ifumbire" : "When to apply fertilizer"}
-                  </p>
-                </div>
-              </div>
-              <Switch checked={fertilizationEnabled} onCheckedChange={setFertilizationEnabled} />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Bug className="w-4 h-4 text-red-500" />
-                <div>
-                  <p className="font-display font-semibold text-sm">
-                    {lang === "ki" ? "Ibyonnyi" : "Pest Alerts"}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {lang === "ki" ? "Uburira ku byonnyi n'indwara" : "Warnings about pests & diseases"}
-                  </p>
-                </div>
-              </div>
-              <Switch checked={pestAlertsEnabled} onCheckedChange={setPestAlertsEnabled} />
-            </div>
-
+            <ToggleRow
+              icon={<Droplets className="w-4 h-4 text-blue-500" />}
+              title={lang === "ki" ? "Kuvomera" : "Watering Reminders"}
+              desc={lang === "ki" ? "Uburira bwo kuhira ibihingwa" : "Reminders to water your crops"}
+              checked={wateringEnabled}
+              onChange={setWateringEnabled}
+            />
+            <ToggleRow
+              icon={<Flower2 className="w-4 h-4 text-green-500" />}
+              title={lang === "ki" ? "Ifumbire" : "Fertilization Alerts"}
+              desc={lang === "ki" ? "Igihe cyo gushyira ifumbire" : "When to apply fertilizer"}
+              checked={fertilizationEnabled}
+              onChange={setFertilizationEnabled}
+            />
+            <ToggleRow
+              icon={<Bug className="w-4 h-4 text-red-500" />}
+              title={lang === "ki" ? "Ibyonnyi" : "Pest Alerts"}
+              desc={lang === "ki" ? "Uburira ku byonnyi n'indwara" : "Warnings about pests & diseases"}
+              checked={pestAlertsEnabled}
+              onChange={setPestAlertsEnabled}
+            />
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-accent" />
-                <div>
-                  <p className="font-display font-semibold text-sm">
-                    {lang === "ki" ? "Igihe cyo kumenyesha" : "Notification Time"}
-                  </p>
-                </div>
+                <p className="font-display font-semibold text-sm">
+                  {lang === "ki" ? "Igihe cyo kumenyesha" : "Notification Time"}
+                </p>
               </div>
               <input
                 type="time"
@@ -257,21 +271,14 @@ export default function SettingsPage() {
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
             {lang === "ki" ? "Bika igenamiterere" : "Save Notification Settings"}
           </Button>
-        </div>
+        </SettingsSection>
 
-        {/* Voice Assistant (TTS) Section */}
-        <div className="bg-card rounded-xl border border-border p-4">
-          <div className="flex items-center gap-2 mb-4">
-            {ttsDisabled ? (
-              <VolumeX className="w-5 h-5 text-muted-foreground" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-primary" />
-            )}
-            <h2 className="font-display font-bold text-sm">
-              {lang === "ki" ? "Umufasha w'ijwi" : "Voice Assistant"}
-            </h2>
-          </div>
-
+        {/* Voice Assistant Section */}
+        <SettingsSection
+          icon={ttsDisabled ? VolumeX : Volume2}
+          title={lang === "ki" ? "Umufasha w'ijwi" : "Voice Assistant"}
+          iconClassName={ttsDisabled ? "text-muted-foreground" : "text-primary"}
+        >
           <div className="flex items-center justify-between mb-3">
             <div>
               <p className="font-display font-semibold text-sm">
@@ -289,54 +296,71 @@ export default function SettingsPage() {
             </div>
             <Switch checked={!ttsDisabled} onCheckedChange={toggleTTS} />
           </div>
-
           <p className="text-xs text-muted-foreground">
             {lang === "ki"
               ? "Iyo ijwi ryahagaritswe, ibuto byo 'Tegera' ntibizagaragara mu minsi 30."
               : "When disabled, 'Listen' buttons won't appear for 30 days."}
           </p>
-        </div>
+        </SettingsSection>
 
-        {/* Notification Preview */}
-        <div className="bg-secondary/20 rounded-xl p-4">
-          <p className="font-display font-semibold text-sm mb-2">
-            {lang === "ki" ? "Urugero rw'ubutumwa" : "Sample notifications you'll receive"}
-          </p>
-          <div className="space-y-2">
-            {wateringEnabled && (
-              <div className="bg-card rounded-lg p-3 border border-border">
-                <p className="text-xs font-display font-semibold text-blue-600">💧 {lang === "ki" ? "Kuvomera" : "Watering"}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {lang === "ki"
-                    ? "Ibigori byawe bikeneye amazi. Vomera uyu munsi saa 10 z'igitondo."
-                    : "Your maize needs water. Water today before 10 AM for best results."}
-                </p>
-              </div>
-            )}
-            {fertilizationEnabled && (
-              <div className="bg-card rounded-lg p-3 border border-border">
-                <p className="text-xs font-display font-semibold text-green-600">🌱 {lang === "ki" ? "Ifumbire" : "Fertilization"}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {lang === "ki"
-                    ? "Igihe cyo gushyira ifumbire ya DAP ku birayi byawe. Gukoresha 100g kuri buri gihingwa."
-                    : "Time to apply DAP fertilizer to your potatoes. Use 100g per plant."}
-                </p>
-              </div>
-            )}
-            {pestAlertsEnabled && (
-              <div className="bg-card rounded-lg p-3 border border-border">
-                <p className="text-xs font-display font-semibold text-red-600">🐛 {lang === "ki" ? "Ibyonnyi" : "Pest Alert"}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {lang === "ki"
-                    ? "Icyitonderwa: Ibyonnyi by'inyenzi bigaragara mu karere kawe. Suzuma ibihingwa byawe."
-                    : "Warning: Fall armyworm activity detected in your area. Check your crops today."}
-                </p>
-              </div>
-            )}
+        {/* App Info */}
+        <SettingsSection icon={Smartphone} title={lang === "ki" ? "Ibyerekeye App" : "About"}>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">{lang === "ki" ? "Verisiyo" : "Version"}</span>
+              <span className="font-display font-semibold">1.0.0</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">{lang === "ki" ? "Akarere" : "Zone"}</span>
+              <span className="font-display font-semibold">{lang === "ki" ? RWANDA_ZONES[zone].ki : RWANDA_ZONES[zone].en}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">{lang === "ki" ? "Ururimi" : "Language"}</span>
+              <span className="font-display font-semibold">{lang === "en" ? "English" : "Kinyarwanda"}</span>
+            </div>
           </div>
-        </div>
+        </SettingsSection>
       </div>
     </MobileLayout>
+  );
+}
+
+/* Reusable sub-components */
+function SettingsSection({ icon: Icon, title, children, iconClassName }: {
+  icon: React.ElementType;
+  title: string;
+  children: React.ReactNode;
+  iconClassName?: string;
+}) {
+  return (
+    <div className="bg-card rounded-xl border border-border p-4">
+      <div className="flex items-center gap-2 mb-4">
+        <Icon className={`w-5 h-5 ${iconClassName || "text-primary"}`} />
+        <h2 className="font-display font-bold text-sm">{title}</h2>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function ToggleRow({ icon, title, desc, checked, onChange }: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        {icon}
+        <div>
+          <p className="font-display font-semibold text-sm">{title}</p>
+          <p className="text-xs text-muted-foreground">{desc}</p>
+        </div>
+      </div>
+      <Switch checked={checked} onCheckedChange={onChange} />
+    </div>
   );
 }
 
