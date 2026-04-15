@@ -36,6 +36,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "dash.viewAll": { en: "View all", ki: "Reba byose" },
   "dash.noActivity": { en: "No activity yet", ki: "Nta bikorwa bihari" },
   "dash.noActivityDesc": { en: "Scan a crop or add a farm to get started", ki: "Suzuma igihingwa cyangwa wongere umurima kugira ngo utangire" },
+  "dash.voiceAssistant": { en: "🎤 Voice Assistant", ki: "🎤 Umufasha w'Ijwi" },
+  "dash.voiceDesc": { en: "Speak your crop problem to Kero", ki: "Bwira Kero ikibazo cy'igihingwa" },
 
   // Scan Page
   "scan.title": { en: "AI Crop Diagnosis", ki: "Isuzuma ry'igihingwa na AI" },
