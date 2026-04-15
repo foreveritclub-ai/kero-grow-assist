@@ -1,4 +1,4 @@
-import { Camera, Keyboard, Sprout, TrendingUp, BookOpen, Clock, MessageSquare, CloudSun, Download, WifiOff, CalendarDays } from "lucide-react";
+import { Camera, Keyboard, Sprout, TrendingUp, BookOpen, Clock, MessageSquare, CloudSun, Download, WifiOff, CalendarDays, Mic } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MobileLayout } from "@/components/MobileLayout";
@@ -6,6 +6,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { SmartAlerts } from "@/components/SmartAlerts";
+import { FarmScore } from "@/components/FarmScore";
 
 interface RecentItem {
   id: string;
@@ -40,6 +42,7 @@ export default function Dashboard() {
 
   const actionCards = [
     { icon: Camera, titleKey: "dash.scanCrop", descKey: "dash.scanDesc", path: "/scan", variant: "accent" as const },
+    { icon: Mic, titleKey: "dash.voiceAssistant", descKey: "dash.voiceDesc", path: "/voice", variant: "accent" as const },
     { icon: Keyboard, titleKey: "dash.describeSymptoms", descKey: "dash.describeDesc", path: "/scan?mode=text", variant: "primary" as const },
     { icon: Sprout, titleKey: "dash.farmTracker", descKey: "dash.farmTrackerDesc", path: "/farm", variant: "primary" as const },
     { icon: TrendingUp, titleKey: "dash.harvestPrediction", descKey: "dash.harvestDesc", path: "/scan?mode=text", variant: "primary" as const },
@@ -122,6 +125,16 @@ export default function Dashboard() {
             );
           })}
         </div>
+      </div>
+
+      {/* Smart Alerts */}
+      <div className="px-5 mt-4">
+        <SmartAlerts />
+      </div>
+
+      {/* Farm Score */}
+      <div className="px-5 mt-4">
+        <FarmScore />
       </div>
 
       {/* Download & Offline Buttons */}
